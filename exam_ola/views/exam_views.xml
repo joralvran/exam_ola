@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherited" model="ir.ui.view">
+        <field name="name">sale.order.form.inherited</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- The 'Bonus currency' field is positioned just after the 'payment_term_id' field. ' -->
+            <field name="payment_term_id" position="after">
+                <field name="moneda_para_bonos"/>
+            </field>
+            <!-- The 'Bono' field in the 'Líneas del pedido' tab just after the 'product_id' field' -->
+            <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
+                <field name="bono"/>
+            </xpath>
+            <!-- We added the 'Resumen de Bonos' tab to the notebook. -->
+            <notebook position="inside">
+                <page string="Resumen de bonos">
+                    <field name="resumen_bono_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="producto"/>
+                            <field name="monto"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
+
+
